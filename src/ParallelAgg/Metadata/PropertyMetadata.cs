@@ -32,5 +32,9 @@
         public PropertyEventArgs EventArgs {
             get { return _eventArgs; }
         }
+
+        public string Name {
+            get { return Char.ToString((char)('A' + _index)); }
+        }
     }
 }

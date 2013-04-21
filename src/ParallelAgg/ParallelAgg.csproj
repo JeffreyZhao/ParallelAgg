@@ -41,6 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregation\AggregationConfig.cs" />
+    <Compile Include="Aggregation\AvgPropertyAggregatorConfig.cs" />
+    <Compile Include="Aggregation\IAggregationResult.cs" />
+    <Compile Include="Aggregation\IAggregationService.cs" />
+    <Compile Include="Aggregation\WgtAvgPropertyAggregatorConfig.cs" />
+    <Compile Include="Aggregation\SumPropertyAggregatorConfig.cs" />
+    <Compile Include="Aggregation\PropertyAggregatorConfig.cs" />
     <Compile Include="Aggregation\SumPropertyAggregator.cs" />
     <Compile Include="Aggregation\IPropertyAggregator.cs" />
     <Compile Include="Aggregation\ValueTuple.cs" />
