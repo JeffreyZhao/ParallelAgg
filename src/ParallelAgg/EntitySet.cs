@@ -1,9 +1,10 @@
 ﻿namespace ParallelAgg {
 
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
-    public class EntitySet {
+    public class EntitySet : IEnumerable<Entity> {
 
         private readonly HashSet<Entity> _set = new HashSet<Entity>();
 
@@ -32,5 +33,13 @@
         public event EventHandler<EntityEventArgs> EntityAdded;
 
         public event EventHandler<EntityEventArgs> EntityRemoved;
+
+        public IEnumerator<Entity> GetEnumerator() {
+            return _set.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
     }
 }

@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityGrouping.cs" />
+    <Compile Include="AggregationResult.cs" />
+    <Compile Include="AggregationService.cs" />
+    <Compile Include="AggregationRoot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

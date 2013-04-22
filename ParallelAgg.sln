@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8B310A33-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelAgg.Test", "test\ParallelAgg.Test\ParallelAgg.Test.csproj", "{559AF71C-E8D6-4DB3-A18A-32BC852F5E3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelAgg.Serial", "src\ParallelAgg.Serial\ParallelAgg.Serial.csproj", "{21ED86CE-00FB-44BE-94BC-89D4FDC3829C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{559AF71C-E8D6-4DB3-A18A-32BC852F5E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{559AF71C-E8D6-4DB3-A18A-32BC852F5E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{559AF71C-E8D6-4DB3-A18A-32BC852F5E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21ED86CE-00FB-44BE-94BC-89D4FDC3829C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21ED86CE-00FB-44BE-94BC-89D4FDC3829C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21ED86CE-00FB-44BE-94BC-89D4FDC3829C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21ED86CE-00FB-44BE-94BC-89D4FDC3829C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B0B02B5-F3AA-4E7A-8FED-2C09AC17020F} = {419851D8-0ED8-4047-9488-F28B7B71C16D}
+		{21ED86CE-00FB-44BE-94BC-89D4FDC3829C} = {419851D8-0ED8-4047-9488-F28B7B71C16D}
 		{559AF71C-E8D6-4DB3-A18A-32BC852F5E3A} = {8B310A33-9099-477D-A868-D68DFA1904D6}
 	EndGlobalSection
 EndGlobal

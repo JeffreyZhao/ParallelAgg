@@ -12,7 +12,7 @@
 
         public EntityMetadata(int keyCount, IEnumerable<PropertyMetadata> properties) {
             _keyCount = keyCount;
-            _properties = new ReadOnlyCollection<PropertyMetadata>(_properties.ToList());
+            _properties = new ReadOnlyCollection<PropertyMetadata>(properties.ToList());
         }
 
         public int KeyCount {
