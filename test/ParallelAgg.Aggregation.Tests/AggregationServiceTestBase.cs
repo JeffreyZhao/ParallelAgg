@@ -104,7 +104,7 @@
             Assert.Null(_rootResult.Get(2));
         }
 
-        public void UpdateInternal() {
+        protected void UpdateInternal() {
             _entity0.Set(_property0, 100);
             _entity1.Set(_property1, 200);
             _entity2.Set(_property2, 300);
