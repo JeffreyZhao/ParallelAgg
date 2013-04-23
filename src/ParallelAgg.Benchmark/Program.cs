@@ -8,6 +8,7 @@
     using System.Threading;
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
+    using SerialAggregationService = ParallelAgg.Aggregation.Serial.AggregationService;
 
     class Program
     {
@@ -141,7 +142,7 @@
             var watch = new Stopwatch();
             watch.Start();
 
-            var service = new Serial.AggregationService();
+            var service = new SerialAggregationService();
             var root = service.Aggregate(set, metadata, config);
             root.Start();
 

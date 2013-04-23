@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ParallelAgg.Serial\ParallelAgg.Serial.csproj">
-      <Project>{21ed86ce-00fb-44be-94bc-89d4fdc3829c}</Project>
-      <Name>ParallelAgg.Serial</Name>
+    <ProjectReference Include="..\ParallelAgg.Aggregation.Serial\ParallelAgg.Aggregation.Serial.csproj">
+      <Project>{d25f6edf-ae9a-404a-b96e-53c7b062f85d}</Project>
+      <Name>ParallelAgg.Aggregation.Serial</Name>
     </ProjectReference>
     <ProjectReference Include="..\ParallelAgg\ParallelAgg.csproj">
       <Project>{7B0B02B5-F3AA-4E7A-8FED-2C09AC17020F}</Project>
