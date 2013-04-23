@@ -82,9 +82,13 @@
             return _aggregators[config.Index].Value;
         }
 
-        public IAggregationResult Get(int key) {
+        public AggregationResult Get(int key) {
             AggregationResult result;
             return _groupResults.TryGetValue(key, out result) ? result : null;
+        }
+
+        IAggregationResult IAggregationResult.Get(int key) {
+            return Get(key);
         }
     }
 }

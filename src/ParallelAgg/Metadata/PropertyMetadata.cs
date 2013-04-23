@@ -36,5 +36,9 @@
         public string Name {
             get { return Char.ToString((char)('A' + _index)); }
         }
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

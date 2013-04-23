@@ -11,8 +11,15 @@
         private readonly ReadOnlyCollection<PropertyMetadata> _properties;
 
         public EntityMetadata(int keyCount, IEnumerable<PropertyMetadata> properties) {
+            Debug.Assert(keyCount > 0);
+
+            var propertyList = properties.ToList();
+            for (var i = 0; i < propertyList.Count; i++) {
+                Debug.Assert(propertyList[i].Index == i);
+            }
+
             _keyCount = keyCount;
-            _properties = new ReadOnlyCollection<PropertyMetadata>(properties.ToList());
+            _properties = new ReadOnlyCollection<PropertyMetadata>(propertyList);
         }
 
         public int KeyCount {

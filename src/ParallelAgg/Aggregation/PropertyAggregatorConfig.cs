@@ -39,5 +39,9 @@
         }
 
         public abstract IPropertyAggregator CreateAggregator();
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }
