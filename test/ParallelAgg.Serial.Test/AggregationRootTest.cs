@@ -33,15 +33,15 @@
         }
 
         public AggregationRootTest() {
-            _property0 = new PropertyMetadata(0);
-            _property1 = new PropertyMetadata(1);
-            _property2 = new PropertyMetadata(2);
+            _metadata = new EntityMetadata(1, 3);
+
+            _property0 = _metadata.Properties[0];
+            _property1 = _metadata.Properties[1];
+            _property2 = _metadata.Properties[2];
 
             _aggregatorConfig0 = new WgtAvgPropertyAggregatorConfig(0, _property0, _property1);
             _aggregatorConfig1 = new WgtAvgPropertyAggregatorConfig(1, _property1, _property2);
             _aggregatorConfig2 = new WgtAvgPropertyAggregatorConfig(2, _property0, _property2);
-
-            _metadata = new EntityMetadata(1, new[] { _property0, _property1, _property2 });
 
             _entity0 = CreateEntity(0, 10, 20, 30);
             _entity1 = CreateEntity(1, 11, 21, 31);

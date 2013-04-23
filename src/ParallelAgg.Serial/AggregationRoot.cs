@@ -7,7 +7,7 @@
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
 
-    public class AggregationRoot {
+    internal class AggregationRoot : IAggregationRoot {
 
         private readonly EntitySet _set;
         private readonly EntityMetadata _metadata;
@@ -29,6 +29,14 @@
         }
 
         public AggregationResult Result { get; private set; }
+
+        IAggregationResult IAggregationRoot.Result {
+            get { return Result; }
+        }
+
+        public bool Running {
+            get { return false; }
+        }
 
         public void Start() {
             Result = new AggregationResult(_metadata, _config, 0);
@@ -65,7 +73,11 @@
 
             var entity = (Entity)sender;
             _changingProperty = args.Property;
-            _updates = GetUpdates(entity, _config.GetAggregatorsUpdateWith(args.Property));
+
+            var aggregatorsToUpdate = _config.GetAggregatorsUpdateWith(args.Property);
+            if (aggregatorsToUpdate != null) {
+                _updates = GetUpdates(entity, aggregatorsToUpdate);
+            }
         }
 
         private void EntityOnPropertyChanged(object sender, PropertyEventArgs args) {

@@ -3,7 +3,7 @@
     using System.Diagnostics;
     using ParallelAgg.Metadata;
 
-    public class SumPropertyAggregator : IPropertyAggregator {
+    internal class SumPropertyAggregator : IPropertyAggregator {
 
         private readonly PropertyMetadata _property;
 

@@ -17,17 +17,17 @@
         private readonly AggregationConfig _config;
 
         public AggregationConfigTest() {
-            _property0 = new PropertyMetadata(0);
-            _property1 = new PropertyMetadata(1);
-            _property2 = new PropertyMetadata(2);
+            var metadata = new EntityMetadata(1, 3);
+
+            _property0 = metadata.Properties[0];
+            _property1 = metadata.Properties[1];
+            _property2 = metadata.Properties[2];
 
             _aggregatorConfig0 = new WgtAvgPropertyAggregatorConfig(0, _property0, _property1);
             _aggregatorConfig1 = new WgtAvgPropertyAggregatorConfig(1, _property1, _property2);
             _aggregatorConfig2 = new WgtAvgPropertyAggregatorConfig(2, _property0, _property2);
 
-            _config = new AggregationConfig(
-                new EntityMetadata(1, new[] { _property0, _property1, _property2 }),
-                new[] { _aggregatorConfig0, _aggregatorConfig1, _aggregatorConfig2 });
+            _config = new AggregationConfig(metadata, new[] { _aggregatorConfig0, _aggregatorConfig1, _aggregatorConfig2 });
         }
 
         [Fact]

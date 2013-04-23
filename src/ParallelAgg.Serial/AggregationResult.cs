@@ -6,7 +6,7 @@
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
 
-    public class AggregationResult : IAggregationResult {
+    internal class AggregationResult : IAggregationResult {
 
         private readonly EntityMetadata _metadata;
         private readonly AggregationConfig _config;
@@ -89,6 +89,10 @@
 
         IAggregationResult IAggregationResult.Get(int key) {
             return Get(key);
+        }
+
+        public IEnumerable<int> Keys {
+            get { return _groupResults == null ? Enumerable.Empty<int>() : _groupResults.Keys; }
         }
     }
 }

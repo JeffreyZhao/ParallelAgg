@@ -20,7 +20,7 @@
         private readonly int _index;
         private readonly PropertyEventArgs _eventArgs;
 
-        public PropertyMetadata(int index) {
+        internal PropertyMetadata(int index) {
             _index = index;
             _eventArgs = new PropertyEventArgs(this);
         }

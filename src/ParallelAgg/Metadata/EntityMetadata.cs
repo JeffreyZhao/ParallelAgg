@@ -1,6 +1,5 @@
 ﻿namespace ParallelAgg.Metadata {
 
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -10,16 +9,13 @@
         private readonly int _keyCount;
         private readonly ReadOnlyCollection<PropertyMetadata> _properties;
 
-        public EntityMetadata(int keyCount, IEnumerable<PropertyMetadata> properties) {
+        public EntityMetadata(int keyCount, int propertyCount) {
             Debug.Assert(keyCount > 0);
-
-            var propertyList = properties.ToList();
-            for (var i = 0; i < propertyList.Count; i++) {
-                Debug.Assert(propertyList[i].Index == i);
-            }
+            Debug.Assert(propertyCount > 0);
 
             _keyCount = keyCount;
-            _properties = new ReadOnlyCollection<PropertyMetadata>(propertyList);
+            _properties = new ReadOnlyCollection<PropertyMetadata>(
+                Enumerable.Range(0, propertyCount).Select(i => new PropertyMetadata(i)).ToList());
         }
 
         public int KeyCount {

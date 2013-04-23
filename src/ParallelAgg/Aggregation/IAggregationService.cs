@@ -3,6 +3,6 @@
     using ParallelAgg.Metadata;
 
     public interface IAggregationService {
-        IAggregationResult Aggregate(EntitySet set, EntityMetadata metadata, AggregationConfig config);
+        IAggregationRoot Aggregate(EntitySet set, EntityMetadata metadata, AggregationConfig config);
     }
 }

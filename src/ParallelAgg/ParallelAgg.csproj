@@ -37,10 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregation\AggregationConfig.cs" />
-    <Compile Include="Aggregation\PropertyAggregatorUpdate.cs" />
     <Compile Include="Aggregation\AvgPropertyAggregatorConfig.cs" />
     <Compile Include="Aggregation\IAggregationResult.cs" />
+    <Compile Include="Aggregation\IAggregationRoot.cs" />
     <Compile Include="Aggregation\IAggregationService.cs" />
+    <Compile Include="Aggregation\PropertyAggregatorUpdate.cs" />
     <Compile Include="Aggregation\WgtAvgPropertyAggregatorConfig.cs" />
     <Compile Include="Aggregation\SumPropertyAggregatorConfig.cs" />
     <Compile Include="Aggregation\PropertyAggregatorConfig.cs" />
