@@ -1,4 +1,4 @@
-﻿namespace ParallelAgg.Aggregation.Serial {
+﻿namespace ParallelAgg.Aggregation.Parallel {
 
     using ParallelAgg.Metadata;
 

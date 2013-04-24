@@ -5,10 +5,10 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Threading;
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
     using SerialAggregationService = ParallelAgg.Aggregation.Serial.AggregationService;
+    using ParallelAggregationService = ParallelAgg.Aggregation.Parallel.AggregationService;
 
     class Program
     {
@@ -142,7 +142,7 @@
             var watch = new Stopwatch();
             watch.Start();
 
-            var service = new SerialAggregationService();
+            var service = isParallel ? (IAggregationService)new ParallelAggregationService() : new SerialAggregationService();
             var root = service.Aggregate(set, config, metadata);
             root.Start();
 
@@ -167,11 +167,8 @@
             }
 
             Console.WriteLine();
-            Console.WriteLine("Waiting for complete.");
-
-            while (root.Running) {
-                Thread.Sleep(500);
-            }
+            Console.WriteLine("Waiting for completion.");
+            root.WaitForCompletion();
 
             Console.WriteLine("Time: " + watch.Elapsed);
 

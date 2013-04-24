@@ -27,7 +27,7 @@
 
         public abstract IAggregationResult Result { get; }
 
-        public abstract bool Running { get; }
+        public abstract void WaitForCompletion();
 
         public void Start() {
             foreach (var entity in _set) {

@@ -1,6 +1,7 @@
-﻿namespace ParallelAgg.Aggregation.Serial {
+﻿namespace ParallelAgg.Aggregation.Parallel {
 
     using System.Collections.Generic;
+    using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
 
     internal class AggregationRoot : AggregationRootBase {
@@ -15,18 +16,20 @@
 
         public override IAggregationResult Result { get { return _result; } }
 
-        public override void WaitForCompletion() { }
+        public override void WaitForCompletion() {
+            _result.WaitForCompletion();
+        }
 
         protected override void AddEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates) {
-            _result.Add(entity, updates);
+            _result.Post(AggregationChange.Add(entity, updates));
         }
 
         protected override void RemoveEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates) {
-            _result.Remove(entity, updates);
+            _result.Post(AggregationChange.Remove(entity, updates));
         }
 
         protected override void UpdateEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates, PropertyMetadata property, decimal newValue) {
-            _result.Update(entity, updates, property, newValue);
+            _result.Post(AggregationChange.Update(entity, updates, property, newValue));
         }
     }
 }
