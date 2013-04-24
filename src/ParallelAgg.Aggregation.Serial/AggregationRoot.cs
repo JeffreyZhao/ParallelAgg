@@ -15,7 +15,9 @@
 
         public override IAggregationResult Result { get { return _result; } }
 
-        public override void WaitForCompletion() { }
+        public override bool Running {
+            get { return false; }
+        }
 
         protected override void AddEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates) {
             _result.Add(entity, updates);

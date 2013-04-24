@@ -5,10 +5,11 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
-    using SerialAggregationService = ParallelAgg.Aggregation.Serial.AggregationService;
     using ParallelAggregationService = ParallelAgg.Aggregation.Parallel.AggregationService;
+    using SerialAggregationService = ParallelAgg.Aggregation.Serial.AggregationService;
 
     class Program
     {
@@ -168,7 +169,10 @@
 
             Console.WriteLine();
             Console.WriteLine("Waiting for completion.");
-            root.WaitForCompletion();
+            
+            while (root.Running) {
+                Thread.Sleep(100);
+            }
 
             Console.WriteLine("Time: " + watch.Elapsed);
 

@@ -1,6 +1,7 @@
 ﻿namespace ParallelAgg.Aggregation.Tests {
 
     using System.Linq;
+    using System.Threading;
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
     using Xunit;
@@ -75,8 +76,14 @@
             Verify(entities, result, _aggregatorConfig2);
         }
 
+        private void WaitForCompletion() {
+            while (_root.Running) {
+                Thread.Sleep(100);
+            }
+        }
+
         protected void VerifyInternal() {
-            _root.WaitForCompletion();
+            WaitForCompletion();
 
             Verify(_rootResult, _entity0, _entity1, _entity2);
             Verify(_rootResult.Get(0), _entity0);
@@ -88,7 +95,7 @@
             _set.Remove(_entity0);
             _set.Remove(_entity2);
 
-            _root.WaitForCompletion();
+            WaitForCompletion();
 
             Verify(_rootResult, _entity1);
             Verify(_rootResult.Get(1), _entity1);
