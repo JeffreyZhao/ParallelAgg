@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregation\AggregationConfig.cs" />
+    <Compile Include="Aggregation\AggregationRootBase.cs" />
     <Compile Include="Aggregation\AvgPropertyAggregatorConfig.cs" />
     <Compile Include="Aggregation\IAggregationResult.cs" />
     <Compile Include="Aggregation\IAggregationRoot.cs" />

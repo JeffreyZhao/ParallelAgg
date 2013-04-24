@@ -143,7 +143,7 @@
             watch.Start();
 
             var service = new SerialAggregationService();
-            var root = service.Aggregate(set, metadata, config);
+            var root = service.Aggregate(set, config, metadata);
             root.Start();
 
             Console.WriteLine("Done");

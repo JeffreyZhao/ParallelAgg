@@ -4,8 +4,8 @@
     using ParallelAgg.Metadata;
 
     public class AggregationService : IAggregationService {
-        public IAggregationRoot Aggregate(EntitySet set, EntityMetadata metadata, AggregationConfig config) {
-            return new AggregationRoot(set, metadata, config);
+        public IAggregationRoot Aggregate(EntitySet set, AggregationConfig config, EntityMetadata metadata) {
+            return new AggregationRoot(set, config, metadata);
         }
     }
 }

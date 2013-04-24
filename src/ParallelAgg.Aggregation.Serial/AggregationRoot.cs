@@ -1,96 +1,35 @@
 ﻿namespace ParallelAgg.Aggregation.Serial {
 
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using ParallelAgg.Aggregation;
     using ParallelAgg.Metadata;
 
-    internal class AggregationRoot : IAggregationRoot {
+    internal class AggregationRoot : AggregationRootBase {
 
-        private readonly EntitySet _set;
-        private readonly EntityMetadata _metadata;
-        private readonly AggregationConfig _config;
+        private readonly AggregationResult _result;
 
-        private readonly EventHandler<PropertyEventArgs> _entityOnPropertyChangingHandler;
-        private readonly EventHandler<PropertyEventArgs> _entityOnPropertyChangedHandler;
+        public AggregationRoot(EntitySet set, AggregationConfig config, EntityMetadata metadata)
+            : base(set, config) {
 
-        private PropertyMetadata _changingProperty;
-        private List<PropertyAggregatorUpdate> _updates;
-
-        public AggregationRoot(EntitySet set, EntityMetadata metadata, AggregationConfig config) {
-            _set = set;
-            _metadata = metadata;
-            _config = config;
-
-            _entityOnPropertyChangingHandler = EntityOnPropertyChanging;
-            _entityOnPropertyChangedHandler = EntityOnPropertyChanged;
+            _result = new AggregationResult(metadata, config, 0);
         }
 
-        public AggregationResult Result { get; private set; }
+        public override IAggregationResult Result { get { return _result; } }
 
-        IAggregationResult IAggregationRoot.Result {
-            get { return Result; }
-        }
-
-        public bool Running {
+        public override bool Running {
             get { return false; }
         }
 
-        public void Start() {
-            Result = new AggregationResult(_metadata, _config, 0);
-
-            foreach (var entity in _set) {
-                AddEntity(entity);
-            }
-
-            _set.EntityAdded += (_, args) => AddEntity(args.Entity);
-            _set.EntityRemoved += (_, args) => RemoveEntity(args.Entity);
+        protected override void AddEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates) {
+            _result.Add(entity, updates);
         }
 
-        private List<PropertyAggregatorUpdate> GetUpdates(Entity entity, IEnumerable<PropertyAggregatorConfig> configs) {
-            return configs.Select(c => new PropertyAggregatorUpdate(c, c.CaptureValues(entity))).ToList();
-        } 
-
-        private void AddEntity(Entity entity) {
-            entity.PropertyChanging += _entityOnPropertyChangingHandler;
-            entity.PropertyChanged += _entityOnPropertyChangedHandler;
-
-            Result.Add(entity, GetUpdates(entity, _config.Aggregators));
+        protected override void RemoveEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates) {
+            _result.Remove(entity, updates);
         }
 
-        private void RemoveEntity(Entity entity) {
-            entity.PropertyChanging -= _entityOnPropertyChangingHandler;
-            entity.PropertyChanged -= _entityOnPropertyChangedHandler;
-
-            Result.Remove(entity, GetUpdates(entity, _config.Aggregators));
-        }
-
-        private void EntityOnPropertyChanging(object sender, PropertyEventArgs args) {
-            Debug.Assert(_changingProperty == null);
-            Debug.Assert(_updates == null);
-
-            var entity = (Entity)sender;
-            _changingProperty = args.Property;
-
-            var aggregatorsToUpdate = _config.GetAggregatorsUpdateWith(args.Property);
-            if (aggregatorsToUpdate != null) {
-                _updates = GetUpdates(entity, aggregatorsToUpdate);
-            }
-        }
-
-        private void EntityOnPropertyChanged(object sender, PropertyEventArgs args) {
-            Debug.Assert(_changingProperty == args.Property);
-            Debug.Assert(_updates != null);
-
-            var entity = (Entity)sender;
-            var newValue = entity.Get(_changingProperty);
-
-            Result.Update(entity, _updates, _changingProperty, newValue);
-
-            _changingProperty = null;
-            _updates = null;
+        protected override void UpdateEntity(Entity entity, ICollection<PropertyAggregatorUpdate> updates, PropertyMetadata property, decimal newValue) {
+            _result.Update(entity, updates, property, newValue);
         }
     }
 }

@@ -54,7 +54,7 @@
 
             var config = new AggregationConfig(_metadata, new[] { _aggregatorConfig0, _aggregatorConfig1, _aggregatorConfig2 });
             var service = new TAggregationService();
-            _root = service.Aggregate(_set, _metadata, config);
+            _root = service.Aggregate(_set, config, _metadata);
             _root.Start();
 
             _set.Add(_entity2);

@@ -91,7 +91,7 @@
         }
 
         public IEnumerable<int> Keys {
-            get { return _groupResults == null ? Enumerable.Empty<int>() : _groupResults.Keys; }
+            get { return NoGroupResults ? Enumerable.Empty<int>() : _groupResults.Keys; }
         }
     }
 }
