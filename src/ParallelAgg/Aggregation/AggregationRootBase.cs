@@ -50,8 +50,8 @@
         private void SetOnEntityRemoved(object sender, EntityEventArgs args) {
             var entity = args.Entity;
 
-            entity.PropertyChanging += _entityOnPropertyChangingHandler;
-            entity.PropertyChanged += _entityOnPropertyChangedHandler;
+            entity.PropertyChanging -= _entityOnPropertyChangingHandler;
+            entity.PropertyChanged -= _entityOnPropertyChangedHandler;
 
             RemoveEntity(entity, GetUpdates(entity, _config.Aggregators));
         }
